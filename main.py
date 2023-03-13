@@ -1,7 +1,7 @@
 from tabulate import tabulate
 
 class Person: 
-    def __init__(self, name, birthday, phone, email, notes) -> None:
+    def __init__(self, name = " ", birthday = " ", phone = " ", email = " ", notes = " ") -> None:
         self.name = name
         self.birthday = birthday
         self.phone = phone 
@@ -80,11 +80,14 @@ def displayContacts():
         i += 1
 
 
-def searchContact(name) -> Person:
+def searchContact(name):
+    group = []
     for contact in contacts:
+
         if contact.name == name:
-            return contact
-    return None
+            group.append(contact)
+        
+    return group if group else None
 
 def mainMenu():
     print("===== MAIN MENU ===== \n")
@@ -100,8 +103,9 @@ def mainMenu():
             name = input("Name: ")
             contact = searchContact(name)
             if contact:
-                table = [["Phone", contact.phone], ["Email", contact.email], ["Birthday", contact.birthday], ["Notes", contact.notes]]
-                print("\n" + tabulate(table, headers = ["Name", contact.name]) + "\n")
+                for value in contact:
+                    table = [["Phone", value.phone], ["Email", value.email], ["Birthday", value.birthday], ["Notes", value.notes]]
+                    print("\n" + tabulate(table, headers = ["Name", value.name]) + "\n")
             else: 
                 print("No contact found...")
         case "0":
@@ -118,7 +122,10 @@ def readContactsFile():
     print (lines)
     for contact in lines:
         print(contact)
+        if len(contact) == 0:
+            continue
         attributes = contact.split("^")
+        print(attributes)
         temp = Person(attributes[0], attributes[1], attributes[2], attributes[3], attributes[4])
         contacts.append(temp)
     
