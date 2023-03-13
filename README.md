@@ -1,5 +1,7 @@
 # Pyhton Contact Book
 - Contactbook using Python
+- saved locally
+
 ## Users can:
     1. add new contacts
         - Name
@@ -13,3 +15,4 @@
     5. edit contacts
 
 # Packages
+- [tabulate](https://github.com/gregbanks/python-tabulate)
