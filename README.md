@@ -3,16 +3,16 @@
 - saved locally
 
 ## Users can:
-    1. add new contacts
+    1. add new contacts [x]
         - Name
         - Phone
         - Email
         - Birthday
         - Notes
-    2. remove contacts
-    3. display contacts
-    4. search contacts
-    5. edit contacts
+    2. remove contacts [ ]
+    3. display contacts [x]
+    4. search contacts [x]
+    5. edit contacts [x]
 
 # Packages
 - [tabulate](https://github.com/gregbanks/python-tabulate)
