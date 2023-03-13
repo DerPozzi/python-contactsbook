@@ -16,12 +16,12 @@ def sortByName(val):
 
 def addContact():
     global contacts
-    print("===== ADD USER =====")
-    name = input("Name: ")
-    birthday = input("Birthday: ")
-    phone = input("Phone: ")
-    email = input("Email: ")
-    notes = input("Notes: ")
+    print("===== ADD CONTACT =====")
+    name = input("Name: ").strip()
+    birthday = input("Birthday: ").strip()
+    phone = input("Phone: ").strip()
+    email = input("Email: ").strip()
+    notes = input("Notes: ").strip()
     
     temp = Person(name, birthday, phone, email, notes)
     contacts.append(temp)
@@ -60,7 +60,7 @@ def editContact():
         print(" >< No Contacts added yet...")
         return
     
-    name = input(" Which contact do you want to edit? \n >>> ")
+    name = input(" Which contact do you want to edit? \n >>> ").strip()
     for c in contacts:
         if (c.name == name):
             editForm(c)
@@ -89,9 +89,46 @@ def searchContact(name):
         
     return group if group else None
 
+def deleteContact(): 
+    if len(contacts) == 0:
+        print(" >< No Contacts added yet...")
+        return
+    
+    name = input(" Which contact do you want to delete? \n >>> ")
+    contact = searchContact(name.strip())
+
+    if contact:
+        print("Found " + str(len(contact)) + " contact(s):")
+        if len(contact) == 1:
+            userInput = input("Do you wish to proceed? (Y/N) ")
+            if userInput == "Y":
+                temp = contact[0]
+                contacts.remove(contact[0])
+                del temp
+                return
+            print(" Quitting...")
+            return
+        else: 
+            i = 1
+            for value in contact:
+                    print(i)
+                    table = [["Phone", value.phone], ["Email", value.email], ["Birthday", value.birthday], ["Notes", value.notes]]
+                    print("\n" + tabulate(table, headers = ["Name", value.name]) + "\n")
+                    i += 1
+            userInput = int(input("Which contact do you want to delete? >>> "))
+            userInput -= 1
+            temp = contact[userInput]
+            contacts.remove(contact[userInput])
+            del temp
+
+    else: 
+        print(" Contact not found...")        
+    
+    
+
 def mainMenu():
     print("===== MAIN MENU ===== \n")
-    userInput = input(" (1) Add contact \n (2) Edit contact \n (3) Show contacts \n (4) Search Contact \n (0) Quit Program \n >>> ")
+    userInput = input(" (1) Add contact \n (2) Edit contact \n (3) Show contacts \n (4) Search contact \n (5) Delete contact \n (0) Quit Program \n >>> ")
     match userInput:
         case "1":
             addContact()
@@ -101,13 +138,15 @@ def mainMenu():
             displayContacts()
         case "4":
             name = input("Name: ")
-            contact = searchContact(name)
+            contact = searchContact(name.strip())
             if contact:
                 for value in contact:
                     table = [["Phone", value.phone], ["Email", value.email], ["Birthday", value.birthday], ["Notes", value.notes]]
                     print("\n" + tabulate(table, headers = ["Name", value.name]) + "\n")
             else: 
                 print("No contact found...")
+        case "5":
+            deleteContact()
         case "0":
             print ("Quitting program... ")
             return False

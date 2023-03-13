@@ -4,16 +4,16 @@
 
 ## Users can:
 
-1. add new contacts [X]
+* [X] add new contacts 
     - Name
     - Phone
     - Email
     - Birthday
     - Notes
-2. remove contacts [ ]
-3. display contacts [X]
-4. search contacts [X]
-5. edit contacts [X]
+* [X] remove contacts 
+* [X] display contacts 
+* [X] search contacts 
+* [X] edit contacts 
 
 # Packages
 - [tabulate](https://github.com/gregbanks/python-tabulate)
